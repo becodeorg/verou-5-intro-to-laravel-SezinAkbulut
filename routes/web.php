@@ -12,8 +12,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/public', function () {
+
+    return "Hello World";
+});
 
 Route::get('/', function () {
 
-    return view('welcome');
+    return view('post');
+});
+
+Route::get('post2', function () {
+
+    return view('post2');
 });
