@@ -111,31 +111,24 @@ Route::get('/', [HomeController::class, 'index']); // PREFERRED WAY
 
 
 //Blade Project
+
 //Home
-Route::get('/', function () {
-    return view('home');
-});
-
-//Form
-Route::get('/form', function () {
-    return view('form');
-});
-
-//Submit
-/*
-Route::get('/form', [FormController::class, 'show']);
-*/
-
-
-Route::get('/form/create', [FormController::class, 'create']);
-Route::post('/form', [FormController::class, 'store'])->name('form.store');
-Route::get('/form/{id}', [FormController::class, 'show'])->name('form.show');
-Route::get('/form/{id}/edit', [FormController::class, 'edit'])->name('form.edit');
-Route::put('/form/{id}', [FormController::class, 'update'])->name('form.update');
-Route::delete('/form/{id}', [FormController::class, 'destroy'])->name('form.destroy');
+    Route::get('/', [FormController::class, 'index'])->name('home');
+//Show Form
+    Route::get('/form/{id}', [FormController::class, 'show'])->name('form');
+//submit
+    Route::post('/form/store', [FormController::class, 'store'])->name('form.store');
+//Create
+    Route::get('/form/create', [FormController::class, 'create'])->name('form.create');
+//Edit
+    Route::get('/form/{id}/edit', [FormController::class, 'edit'])->name('form.edit');
+//Update
+    Route::put('/form/{id}', [FormController::class, 'update'])->name('form.update');
+//Delete
+    Route::delete('/form/{id}', [FormController::class, 'destroy'])->name('form.destroy');
 
 
-//Route::post('/form/submit', [FormController::class, 'submit'])->name('form.submit');
+
 
 
 

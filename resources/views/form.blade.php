@@ -1,3 +1,6 @@
+
+
+
 @extends('layouts.app')
 
 @section('title', 'Form')
@@ -12,7 +15,7 @@
     @endif
 
     <!-- Form -->
-    <form action="{{ route('form.store') }}" method="post">
+    <form action="{{ route('form.create') }}" method="post">
         @csrf
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" required>
@@ -22,4 +25,3 @@
         <button type="submit">Submit</button>
     </form>
 @endsection
-
