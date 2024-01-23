@@ -32,6 +32,11 @@ class FormController extends Controller
                 'title' => 'Movie 3',
                 'description' => 'This is the third movie.',
             ],
+            [
+                'id' => 4,
+                'title' => 'Movie 4',
+                'description' => 'This is the third movie.',
+            ],
             // Add more movie entries as needed
         ];
         return view('home', compact('movies'));
@@ -41,11 +46,17 @@ class FormController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
         return view('create_form');
     }
 
+    /**
+     * Store a newly created resource in storage.
+     */
+    /**
+     * Store a newly created resource in storage.
+     */
     /**
      * Store a newly created resource in storage.
      */
@@ -58,21 +69,52 @@ class FormController extends Controller
             // Add more validation rules for other movie fields
         ]);
 
-        // Create new movie
+        // Get the current movies
         $movies = $this->getMovies();
+
+        // Create a new movie with an ID based on the count of movies
         $newMovie = [
-            'id' => count($movies) + 1, // Generate a new ID (replace this if you have a better way)
+            'id' => count($movies) + 1,
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             // Add more fields as needed
         ];
+
+        // Add the new movie to the movies array
         $movies[] = $newMovie;
 
-
-        return redirect()->route('home')->with('success', 'Movie added successfully!');
+        // Update the movies and add the new movie in the session
+       // session(['movies' => $movies, 'addedMovies' => [$newMovie]]);
+        // Update the movies in the session
+        session(['movies' => $movies]);
+        // Redirect to home page with success message
+        return redirect()->route('home')->with('success', 'Movie created successfully!');
     }
 
 
+
+    /*// Validation
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        // Add more validation rules for other movie fields
+    ]);
+
+    // Create new movie
+    $movies = $this->getMovies();
+    $newMovie = [
+        'id' => count($movies) + 1, // Generate a new ID (replace this if you have a better way)
+        'title' => $request->input('title'),
+        'description' => $request->input('description'),
+        // Add more fields as needed
+    ];
+    $movies[] = $newMovie;
+
+
+    return redirect()->route('home')->with('success', 'Movie added successfully!');
+}
+
+*/
     /**
      * Display the specified resource.
      */
@@ -80,7 +122,7 @@ class FormController extends Controller
     {
         //
         // You might want to retrieve and display specific data based on $id
-        return view('form');
+        return view('');
     }
 
     /**
@@ -98,6 +140,7 @@ class FormController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
         // Validation
@@ -111,12 +154,66 @@ class FormController extends Controller
         $movies = $this->getMovies();
         $key = $this->findMovieKeyById($movies, $id);
 
-       if ($key !== false) {
-            $movies[$key]['title'] = $request->input('title');
-            $movies[$key]['description'] = $request->input('description');
+        if ($key !== false) {
+            // Create an updated movie array
+            $updatedMovie = [
+                'id' => $id,
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                // Add other fields as needed
+            ];
 
-            // Update other fields as needed
+            // Check if there are updated movies in the session
+            $updatedMovies = session('updatedMovies', []);
 
+            // Add the updated movie to the list
+            $updatedMovies[$id] = $updatedMovie;
+
+            // Update the movies in the session
+            session(['movies' => $movies, 'updatedMovies' => $updatedMovies]);
+
+            // Redirect to home page with success message
+            return redirect()->route('home')->with('success', 'Movie updated successfully!');
+        }
+
+        abort(404); // Movie not found
+    }
+
+
+
+    /*
+        public function update(Request $request, string $id)
+        {
+            // Validation
+            $request->validate([
+                'title' => 'required|string|max:255',
+                'description' => 'required|string',
+                // Add more validation rules for other movie fields
+            ]);
+
+            // Update movie based on $id
+            $movies = $this->getMovies();
+            $key = $this->findMovieKeyById($movies, $id);
+
+            if ($key !== false) {
+                $movies[$key]['title'] = $request->input('title');
+                $movies[$key]['description'] = $request->input('description');
+                // Update other fields as needed
+
+                // Save the updated movies array in the session
+                session(['movies' => $movies]);
+
+                // Handle updated movies and redirect to home
+                $this->handleUpdatedMovies($request, $movies);
+
+                return redirect()->route('home')->with('success', 'Movie updated successfully!');
+            }
+
+            abort(404); // Movie not found
+        }
+
+        private function handleUpdatedMovies(Request $request, $movies)
+        {
             // Check if updated movies are submitted
             if ($request->has('updatedMovies')) {
                 $updatedMovies = json_decode($request->input('updatedMovies'), true);
@@ -124,21 +221,12 @@ class FormController extends Controller
                 // Update the movies in the session
                 session(['movies' => $updatedMovies]);
             }
-            // Save the updated movies array in the session
-            session(['movies' => $movies]);
-
-            // Debug statements
-           // dump($movies);  // Check if the movies array is updated
-           // dump(session('movies'));  // Check if the session variable is updated
-           // die("Debugging stopped!");
-
-            // Redirect to home page with success message
-           // return redirect()->route('home')->with('success', 'Movie updated successfully!');
-           return view('home', compact('movies'));
         }
+    */
 
-        abort(404); // Movie not found
-    }
+
+
+
 
 
     /**
@@ -150,9 +238,22 @@ class FormController extends Controller
         $key = $this->findMovieKeyById($movies, $id);
 
         if ($key !== false) {
+            // Retrieve the deleted movie for display on the home page
+            $deletedMovie = $movies[$key];
+
+            // Remove the movie from the movies array
             unset($movies[$key]);
 
-            session(['movies' => $movies]);
+            // Check if there are deleted movies in the session
+            $deletedMovies = session('deletedMovies', []);
+
+            // Add the deleted movie to the list
+            $deletedMovies[$id] = $deletedMovie;
+
+            // Update the movies and deleted movies in the session
+            session(['movies' => $movies, 'deletedMovies' => $deletedMovies]);
+
+            // Redirect to home page with success message
             return redirect()->route('home')->with('success', 'Movie deleted successfully!');
         }
 
@@ -161,30 +262,14 @@ class FormController extends Controller
 
 
 
+
+
     /**
      * Helper method to get the array of movies.
      */
     private function getMovies()
     {
-        $movies = [
-            [
-                'id' => 1,
-                'title' => 'Movie 1',
-                'description' => 'This is the first movie.',
-            ],
-            [
-                'id' => 2,
-                'title' => 'Movie 2',
-                'description' => 'This is the second movie.',
-            ],
-            [
-                'id' => 3,
-                'title' => 'Movie 3',
-                'description' => 'This is the third movie.',
-            ],
-        ];
-
-        return $movies;
+        return session('movies', []);
     }
 
 
