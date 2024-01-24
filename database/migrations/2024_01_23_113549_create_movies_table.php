@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('movies', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description');
+            // Add other columns as needed
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

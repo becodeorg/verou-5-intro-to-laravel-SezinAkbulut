@@ -22,6 +22,4 @@
 
         <button type="submit" class="btn btn-primary">Create Movie</button>
     </form>
-
-
 @endsection

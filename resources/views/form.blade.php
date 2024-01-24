@@ -17,8 +17,15 @@
     <!-- Form -->
     <form action="{{ route('form.create') }}" method="post">
         @csrf
-        <label for="name">Name:</label>
-        <input type="text" name="name" id="name" required>
+        <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" class="form-control" name="title" id="title" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" name="description" id="description" required></textarea>
+        </div>
 
         <!-- Add more form fields -->
 
