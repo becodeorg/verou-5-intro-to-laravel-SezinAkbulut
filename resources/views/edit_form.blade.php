@@ -16,7 +16,7 @@
         <input name="description" id="description" value="{{ old('description', $movie['description']) }}" required></input>
         <!-- Add more form fields-->
         <br>
-        <button type="submit">Update</button>
+        <button class="btn btn-warning" type="submit">Update</button>
     </form>
 
     {{-- Add a hidden input to pass the updated movies to the home page --}}

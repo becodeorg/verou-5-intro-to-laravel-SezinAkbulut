@@ -116,9 +116,8 @@ Route::get('/form/create', [FormController::class, 'create'])->name('form.create
 // Home
 Route::get('/', [FormController::class, 'index'])->name('home');
 // Show Form
-Route::get('/form/{id}', [FormController::class, 'show'])->name('form');
-
-// Submit
+Route::get('/form/{id}', [FormController::class, 'show'])->name('form'); // Add search option and display each
+// Submit Form
 Route::post('/form/store', [FormController::class, 'store'])->name('form.store');
 // Edit
 Route::get('/form/{id}/edit', [FormController::class, 'edit'])->name('form.edit');
