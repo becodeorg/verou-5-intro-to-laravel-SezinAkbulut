@@ -3,29 +3,39 @@
 @section('title', 'Edit Form')
 
 @section('content')
-    <div class="container text-center mt-5">
-    <h1 class="text-warning">Edit Form</h1>
-    <br>
-    <form action="{{ route('form.update', ['id' => $movie->id]) }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
 
-        <div class="form-group">
-            <label for="poster">Poster:</label>
-            <input type="file" name="poster" class="form-control">
-        </div>
-        <br>
+    <div class="container mt-5">
+        <h1 class="text-center text-warning">Edit Form</h1>
 
-        <label for="title"><strong>Title:</strong></label>
-        <input type="text" name="title" id="title" value="{{ old('title', $movie->title) }}" required>
-        <br>
+        <form action="{{ route('form.update', ['id' => $movie->id]) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-        <label for="description"><strong>Description:</strong></label>
-        <input name="description" id="description" value="{{ old('description', $movie->description) }}"
-               required>
-        <br>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    @if($movie->poster)
+                        <div class="form-group text-center">
+                            <label for="currentPoster"></label>
+                            <img src="{{ asset('storage/' . $movie->poster) }}" class="card-img-top custom-thumbnail" alt="{{ $movie->title }}">
+                        </div>
+                    @endif
+                </div>
+            </div>
 
-        {{-- Hidden input for updating the movie --}}
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="poster"><strong>Poster:</strong></label>
+                        <input type="file" name="poster" class="form-control">
+                    </div>
+
+                    <label for="title"><strong>Title:</strong></label>
+                    <input type="text" name="title" id="title" value="{{ old('title', $movie->title) }}" required class="form-control">
+
+                    <label for="description"><strong>Description:</strong></label>
+                    <input name="description" id="description" value="{{ old('description', $movie->description) }}" required class="form-control">
+
+                    {{-- Hidden input for updating the movie --}}
         <input type="hidden" name="update_movie" value="1">
 
         <br>
@@ -33,6 +43,12 @@
     </form>
 
     </div>
+    <style>
+        .custom-thumbnail {
+            max-width: 30%; /* Adjust the percentage as needed */
+        }
+    </style>
+
 @endsection
 
 <div class="container text-left fixed-bottom mb-5">

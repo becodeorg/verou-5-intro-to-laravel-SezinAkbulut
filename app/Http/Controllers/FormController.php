@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Movie; // Movie Model for if I need
 
@@ -112,6 +113,7 @@ class FormController extends Controller
 
         // Store the poster in the storage disk (e.g., public)
         $posterPath = Storage::disk('public')->put('posters', $request->file('poster'));
+       // $posterPath = $request->file('poster')->store('posters');
 
         // Update the poster path in the database
         $movie->poster = $posterPath;

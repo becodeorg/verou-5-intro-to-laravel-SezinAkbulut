@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title', 'Home')
@@ -22,7 +23,7 @@
                     <div class="movie">
                         <br>
                         <div class="card">
-                            <img src="{{ asset('storage/' . $movie->poster) }}" class="card-img-top" alt="{{ $movie->title }}">
+                            <img src="{{ asset('storage/' . $movie->poster) }}" class="card-img-top custom-thumbnail mx-auto" alt="{{ $movie->title }}">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $movie->title }}</h5>
                                 <p class="card-text">{{ $movie->description }}</p>
@@ -49,4 +50,9 @@
             @dump($movies)
         </div>
     </div>
+    <style>
+        .custom-thumbnail {
+            max-width: 30%; /* Adjust the percentage as needed */
+        }
+    </style>
 @endsection
