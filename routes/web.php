@@ -125,8 +125,10 @@ Route::get('/form/{id}/edit', [FormController::class, 'edit'])->name('form.edit'
 Route::put('/form/{id}', [FormController::class, 'update'])->name('form.update');
 // Delete
 Route::delete('/form/{id}', [FormController::class, 'destroy'])->name('form.destroy');
-
-
+//Search
+Route::get('/search', [FormController::class, 'search'])->name('search');
+//Show Details
+Route::get('/movie/{id}', [FormController::class, 'showDetails'])->name('details');
 
 
 

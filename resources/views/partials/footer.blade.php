@@ -1,1 +1,2 @@
-<p>&copy; {{ date('Y') }} Blade Project</p>
+<p class="text-center mt-20">&copy; {{ date('Y') }} Blade Project</p>
+

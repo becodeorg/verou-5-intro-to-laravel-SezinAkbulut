@@ -391,5 +391,19 @@ class FormController extends Controller
     }
     */
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $movies = Movie::where('title', 'like', "%$query%")->get();
+
+        return view('search', ['movies' => $movies, 'query' => $query]);
+    }
+
+    public function showDetails($id)
+    {
+        $movie = Movie::find($id);
+
+        return view('details', ['movie' => $movie]);
+    }
 
 }
