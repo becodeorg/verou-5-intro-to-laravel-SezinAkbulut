@@ -21,10 +21,14 @@
                 @foreach ($movies as $movie)
                     <div class="movie">
                         <br>
-                        <h2>{{ $movie->title }}</h2>
-                        <p>{{ $movie->description }}</p>
-                        <br>
-                        <a href="{{ route('details', ['id' => $movie->id]) }}" class="btn btn-info">Details</a>
+                        <div class="card">
+                            <img src="{{ asset('storage/' . $movie->poster) }}" class="card-img-top" alt="{{ $movie->title }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $movie->title }}</h5>
+                                <p class="card-text">{{ $movie->description }}</p>
+                                <a href="{{ route('details', ['id' => $movie->id]) }}" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
                         <a href="{{ route('form.edit', ['id' => $movie->id]) }}" class="btn btn-warning">Update</a>
                         <form action="{{ route('form.destroy', ['id' => $movie->id]) }}" method="post" style="display: inline-block;">
                             @csrf

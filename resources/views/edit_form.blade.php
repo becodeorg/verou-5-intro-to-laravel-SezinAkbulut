@@ -6,21 +6,27 @@
     <div class="container text-center mt-5">
     <h1 class="text-warning">Edit Form</h1>
     <br>
-    <form action="{{ route('form.update', ['id' => $movie->id]) }}" method="post">
+    <form action="{{ route('form.update', ['id' => $movie->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PUT')
+
+        <div class="form-group">
+            <label for="poster">Poster:</label>
+            <input type="file" name="poster" class="form-control">
+        </div>
+        <br>
 
         <label for="title"><strong>Title:</strong></label>
         <input type="text" name="title" id="title" value="{{ old('title', $movie->title) }}" required>
         <br>
+
         <label for="description"><strong>Description:</strong></label>
         <input name="description" id="description" value="{{ old('description', $movie->description) }}"
                required>
         <br>
 
-
         {{-- Hidden input for updating the movie --}}
-        <input type="hidden" id="title" name="update_movie" value="1">
+        <input type="hidden" name="update_movie" value="1">
 
         <br>
         <button class="btn btn-warning" type="submit">Update</button>

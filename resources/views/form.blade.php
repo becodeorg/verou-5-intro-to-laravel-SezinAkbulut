@@ -15,7 +15,7 @@
     @endif
 
     <!-- Form -->
-    <form action="{{ route('form.create') }}" method="post">
+    <form action="{{ route('form.create') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <label for="title">Title:</label>
@@ -25,6 +25,11 @@
         <div class="form-group">
             <label for="description">Description:</label>
             <textarea class="form-control" name="description" id="description" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="poster">Poster:</label>
+            <input type="file" name="poster" class="form-control">
         </div>
 
         <!-- Add more form fields -->

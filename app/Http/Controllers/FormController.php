@@ -99,21 +99,26 @@ class FormController extends Controller
     //Database method
     public function store(Request $request)
     {
-        // Validation
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            //'director' => 'required|string', // Add other validation rules for new fields
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'poster' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // Add validation for other fields
         ]);
 
-        // Create a new movie using mass assignment
-        Movie::create([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            //'director' => $request->input('director'), // Add other fields as needed
-        ]);
+        $movie = new Movie;
+        $movie->title = $validatedData['title'];
+        $movie->description = $validatedData['description'];
 
-        // Redirect to home page with success message
+        // Store the poster in the storage disk (e.g., public)
+        $posterPath = Storage::disk('public')->put('posters', $request->file('poster'));
+
+        // Update the poster path in the database
+        $movie->poster = $posterPath;
+
+        // Save other fields...
+        $movie->save();
+
         return redirect()->route('home')->with('success', 'Movie created successfully!');
     }
 
@@ -224,18 +229,33 @@ class FormController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+            'poster' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             // Add more validation rules for other movie fields
         ]);
 
         // Update movie based on $id
         $movie = Movie::findOrFail($id);
+
+        // Update fields
         $movie->update([
             'title' => $request->input('title'),
             'description' => $request->input('description'),
             // Add other fields as needed
         ]);
 
-        // Redirect to home page with success message
+        // Handle poster update
+        if ($request->hasFile('poster')) {
+            // Delete old poster
+            Storage::disk('public')->delete($movie->poster);
+
+            // Store the new poster in the storage disk (e.g., public)
+            $posterPath = Storage::disk('public')->put('posters', $request->file('poster'));
+
+            // Update the poster path in the database
+            $movie->poster = $posterPath;
+            $movie->save();
+        }
+
         return redirect()->route('home')->with('success', 'Movie updated successfully!');
     }
 
