@@ -3,12 +3,19 @@
 @section('title', 'Home')
 
 @section('content')
+    @if(session('success'))
+        <div class="alert alert-success mt-4">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="container text-center">
-        <h1 class="mt-4 font-bold">Movie Collection</h1>
+        <h1 class="mt-4 font-weight-bold text-info display-4">Movie Collection</h1>
+
         <a href="{{ route('form.create') }}" class="btn btn-primary mt-3">Add New</a>
 
-        <!-- Display added movies -->
-        <!-- Display added movies -->
+
+        <!-- Display movies -->
         @if ($movies->count() > 0)
             <div class="mt-4">
                 @foreach ($movies as $movie)
@@ -31,12 +38,6 @@
             </div>
         @else
             <p>No movies found.</p>
-        @endif
-
-    @if(session('success'))
-            <div class="alert alert-success mt-4">
-                {{ session('success') }}
-            </div>
         @endif
 
         {{-- Dump movies for debugging --}}

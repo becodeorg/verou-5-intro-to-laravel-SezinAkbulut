@@ -22,4 +22,8 @@
 
         <button type="submit" class="btn btn-primary">Create Movie</button>
     </form>
+
+    <div class="container text-left fixed-bottom mb-5">
+        <button class="btn btn-dark" onclick="window.location.href='{{ route('home') }}'">Back</button>
+    </div>
 @endsection

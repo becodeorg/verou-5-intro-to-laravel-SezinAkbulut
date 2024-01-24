@@ -16,7 +16,8 @@ class Movie extends Model
     protected $primaryKey = 'id';
 
     // Define the fillable attributes for the model
-    protected $fillable = ['title', 'description'];
+    protected $fillable = ['poster', 'title', 'description'];
+
 
     // Timestamps
     public $timestamps = true;
