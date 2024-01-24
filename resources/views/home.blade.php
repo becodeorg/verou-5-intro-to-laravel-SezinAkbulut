@@ -8,7 +8,7 @@
     <a href="{{ route('form.create') }}" class="btn btn-primary">Add New</a>
 
     <!-- Display updated movies -->
-    @if ($updatedMovies = session('updatedMovies'))
+    @if ($updatedMovies = session('updatedMovies')  )
         <div>
             @foreach ($updatedMovies as $updatedMovie)
                 <div class="movie">
@@ -25,7 +25,6 @@
         </div>
     @endif
 
-    <!-- Display added movies -->
     <!-- Display added movies -->
     @if ($addedMovies = session('movies'))
         <div>
@@ -45,7 +44,8 @@
     @endif
 
 
-
+<br><br>
+    <h2><em>Deleted Movies:</em></h2>
     <!-- Display deleted movies -->
     @if ($deletedMovies = session('deletedMovies'))
         <div>
@@ -53,7 +53,6 @@
                 <div class="movie">
                     <h2>{{ $deletedMovie['title'] }}</h2>
                     <p>{{ $deletedMovie['description'] }}</p>
-                    <p><em>Deleted</em></p>
                 </div>
             @endforeach
         </div>

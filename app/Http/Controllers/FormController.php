@@ -77,6 +77,7 @@ class FormController extends Controller
             'id' => count($movies) + 1,
             'title' => $request->input('title'),
             'description' => $request->input('description'),
+
             // Add more fields as needed
         ];
 
@@ -122,7 +123,7 @@ class FormController extends Controller
     {
         //
         // You might want to retrieve and display specific data based on $id
-        return view('');
+        return view('form{$id}');
     }
 
     /**
