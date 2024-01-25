@@ -4,8 +4,8 @@
 
 @section('content')
 
-    <div class="container mt-5">
-        <h1 class="text-center text-warning">Edit Form</h1>
+    <div class="container mt-3">
+        <h1 class="text-center text-warning mb-5">Update</h1>
 
         <form action="{{ route('form.update', ['id' => $movie->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -36,22 +36,23 @@
                     <input name="description" id="description" value="{{ old('description', $movie->description) }}" required class="form-control">
 
                     {{-- Hidden input for updating the movie --}}
-        <input type="hidden" name="update_movie" value="1">
+                    <input type="hidden" name="update_movie" value="1">
 
-        <br>
-        <button class="btn btn-warning" type="submit">Update</button>
-    </form>
-
+                    <br>
+                    <button class="btn btn-warning" type="submit">Update</button>
+                </div>
+            </div>
+        </form>
     </div>
+
+    <div class="container text-left fixed-bottom mb-5">
+        <button class="btn btn-dark" onclick="window.location.href='{{ route('home') }}'">Back</button>
+    </div>
+
     <style>
         .custom-thumbnail {
-            max-width: 30%; /* Adjust the percentage as needed */
+            max-width: 40%;
         }
     </style>
 
 @endsection
-
-<div class="container text-left fixed-bottom mb-5">
-    <button class="btn btn-dark" onclick="window.location.href='{{ route('home') }}'">Back</button>
-</div>
-

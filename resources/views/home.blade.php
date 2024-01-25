@@ -13,7 +13,7 @@
     <div class="container text-center">
         <h1 class="mt-4 font-weight-bold text-info display-4">Movie Collection</h1>
 
-        <a href="{{ route('form.create') }}" class="btn btn-primary mt-3">Add New</a>
+        <a href="{{ route('form.create') }}" class="btn btn-dark mt-3">Add New</a>
 
 
         <!-- Display movies -->
@@ -22,22 +22,23 @@
                 @foreach ($movies as $movie)
                     <div class="movie">
                         <br>
-                        <div class="card">
-                            <img src="{{ asset('storage/' . $movie->poster) }}" class="card-img-top custom-thumbnail mx-auto" alt="{{ $movie->title }}">
+                        <div class="card bg-dark mb-3">
+                            <img src="{{ asset('storage/' . $movie->poster) }}" class="card-img-top custom-thumbnail mx-auto mt-4" alt="{{ $movie->title }}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $movie->title }}</h5>
-                                <p class="card-text">{{ $movie->description }}</p>
+                                <h5 class="card-title text-light">{{ $movie->title }}</h5>
+                                <p class="card-text text-light">{{ $movie->description }}</p>
                                 <a href="{{ route('details', ['id' => $movie->id]) }}" class="btn btn-primary">Details</a>
-                            </div>
-                        </div>
-                        <a href="{{ route('form.edit', ['id' => $movie->id]) }}" class="btn btn-warning">Update</a>
-                        <form action="{{ route('form.destroy', ['id' => $movie->id]) }}" method="post" style="display: inline-block;">
+
+
+                         <a href="{{ route('form.edit', ['id' => $movie->id]) }}" class="btn btn-warning">Update</a>
+                          <form action="{{ route('form.destroy', ['id' => $movie->id]) }}" method="post" style="display: inline-block;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this movie?')">Delete</button>
                             <br>
-                        </form>
-
+                         </form>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -45,14 +46,16 @@
             <p>No movies found.</p>
         @endif
 
-        {{-- Dump movies for debugging --}}
+        {{-- Dump movies for debugging
         <div class="mt-4">
             @dump($movies)
         </div>
+        --}}
+
     </div>
     <style>
         .custom-thumbnail {
-            max-width: 30%; /* Adjust the percentage as needed */
+            max-width: 30%;
         }
     </style>
 @endsection
