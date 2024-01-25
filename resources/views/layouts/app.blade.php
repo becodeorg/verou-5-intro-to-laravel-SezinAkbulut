@@ -11,7 +11,8 @@
     <!--Laravel Mix JS-->
     <script src="{{ mix('js/app.js') }}"></script>
     <!--Laravel Mix SASS-->
-    {{--<link rel="stylesheet" href="{{ mix('sass/app.scss') }}">--}}
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+
 </head>
 <body>
 <header>
