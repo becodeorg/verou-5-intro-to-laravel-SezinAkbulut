@@ -5,7 +5,7 @@ use App\Models\Post2;
 use Illuminate\Support\Facades\Route;
 //Blade Project
 use App\Http\Controllers\FormController;
-use App\Http\Controllers\RegisterController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -135,9 +135,6 @@ Route::get('/movie/{id}', [FormController::class, 'showDetails'])->name('details
 
 
 
-//REGISTER
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
 
 
 
