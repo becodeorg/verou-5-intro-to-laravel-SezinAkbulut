@@ -5,8 +5,6 @@ use App\Models\Post2;
 use Illuminate\Support\Facades\Route;
 //Blade Project
 use App\Http\Controllers\FormController;
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,7 +23,7 @@ Route::get('/public', function () {
 //Home page
 Route::get('/post', function () {
 
-    return view('post');
+    return view('laravel-blog/post');
 });
 
 //Articles
@@ -44,7 +42,7 @@ Route::get('post/{post2}', function($slug) {
 
     $post2 = file_get_contents($path);
 
-    return view('post2', [
+    return view('laravel-blog/post2', [
         'post2' => $post2
     ]);
 });
@@ -117,7 +115,7 @@ Route::get('/', [HomeController::class, 'index']); // PREFERRED WAY
 // Create
 Route::get('/form/create', [FormController::class, 'create'])->name('form.create');
 // Home
-Route::get('/', [FormController::class, 'index'])->name('home');
+Route::get('/', [FormController::class, 'index'])->name('show.home');
 // Show Form
 //Route::get('/form/{id}', [FormController::class, 'show'])->name('form');
 // Submit Form

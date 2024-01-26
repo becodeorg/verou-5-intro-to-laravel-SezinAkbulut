@@ -1,7 +1,7 @@
 <!-- nav bar-->
 <nav class="navbar navbar-dark bg-dark">
 
-    <a class="navbar-brand text-white font-weight-bold text-success ml-4" href="{{ route('home') }}">Home</a>
+    <a class="navbar-brand text-white font-weight-bold text-success ml-4" href="{{ route('show.home') }}">Home</a>
 
 
     <form class="form-inline" action="{{ route('search') }}" method="GET">
