@@ -1,7 +1,13 @@
 <!-- resources/views/search.blade.php -->
 @extends('layouts.app')
 
+@section('title')
+    Find a movie
+    @endsection
+
 @section('content')
+
+
     <div class="container text-center mt-6">
         <h2 class="text-info text-center">Search Results for "{{ $query }}"</h2>
         <br>
@@ -26,7 +32,7 @@
 
     <br><br>
     <div class="container text-left  mb-5">
-        <button class="btn btn-dark" onclick="window.location.href='{{ route('home') }}'">Back</button>
+        <button class="btn btn-dark" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
     </div>
 
     <style>

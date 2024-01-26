@@ -1,6 +1,3 @@
-
-
-
 @extends('layouts.app')
 
 @section('title', 'Form')
@@ -31,8 +28,6 @@
             <label for="poster">Poster:</label>
             <input type="file" name="poster" class="form-control">
         </div>
-
-        <!-- Add more form fields -->
 
         <button type="submit">Submit</button>
     </form>

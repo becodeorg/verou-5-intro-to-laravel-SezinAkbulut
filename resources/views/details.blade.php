@@ -1,6 +1,8 @@
 <!-- resources/views/movies/details.blade.php -->
 @extends('layouts.app')
 
+@section('title', 'Details')
+
 @section('content')
     <div class="text-center mt-5">
     <h1 class="mt-5 text-info">Movie Details</h1>
@@ -21,7 +23,7 @@
     </div>
 
     <div class="container text-left mb-5">
-        <button class="btn btn-dark" onclick="window.location.href='{{ route('home') }}'">Back</button>
+        <button class="btn btn-dark" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
     </div>
 
     <style>

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Create Form')
+@section('title', 'Create Movie')
 
 @section('content')
+    <title>{{env("APP_NAME") . "Movie Collection"}}</title>
     <h1>Create Movie</h1>
 
     <!-- Form -->
@@ -23,12 +24,12 @@
              <input type="file" name="poster" class="form-control">
         </div>
 
-        <!-- Add more form fields for other movie properties -->
+
         <button type="submit" class="btn btn-primary">Create Movie</button>
 
     </form>
 
     <div class="container text-left fixed-bottom mb-5">
-        <button class="btn btn-dark" onclick="window.location.href='{{ route('home') }}'">Back</button>
+        <button class="btn btn-dark" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
     </div>
 @endsection

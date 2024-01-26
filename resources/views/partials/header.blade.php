@@ -1,4 +1,4 @@
-<!-- views/partials/header.blade.php -->
+<!-- nav bar-->
 <nav class="navbar navbar-dark bg-dark">
 
     <a class="navbar-brand text-white font-weight-bold text-success ml-4" href="{{ route('home') }}">Home</a>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Form')
+@section('title', 'Update')
 
 @section('content')
 
@@ -46,7 +46,7 @@
     </div>
 
     <div class="container text-left fixed-bottom mb-5">
-        <button class="btn btn-dark" onclick="window.location.href='{{ route('home') }}'">Back</button>
+        <button class="btn btn-dark" onclick="window.location.href='{{ route('show.home') }}'">Back</button>
     </div>
 
     <style>
