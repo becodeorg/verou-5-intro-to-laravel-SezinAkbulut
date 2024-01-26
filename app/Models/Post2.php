@@ -19,12 +19,12 @@ class Post2
 
        // base_path();
         if (! file_exists($path =  resource_path("post2/{$slug}.html"))) {
-           // return redirect('post');
+           // return redirect('posts');
             //ddd('file does not exist');
             //abort(404);
             throw new ModelNotFoundException();
         }
 
-        return cache()->remember("post.{$slug}", 1200, fn() => file_get_contents($path));
+        return cache()->remember("posts.{$slug}", 1200, fn() => file_get_contents($path));
     }
 }
